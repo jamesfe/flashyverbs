@@ -9,6 +9,12 @@ from sqlalchemy import Column, DateTime, String, Integer, ForeignKey
 Base = declarative_base()
 
 
+class Language(Base):
+    """A lookup table for languages"""
+    id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
+    language = Column(String, nullable=False)
+
+
 class User(Base):
     """A user who learns."""
     __tablename__ = 'fc_user'
@@ -37,7 +43,7 @@ class Subject(Base):
     """A subject: meaning i, you, him/her, them, etc..."""
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     subject_name = Column(String, nullable=False)
-    language = Column(String(4), nullable=False)
+    language = Column(Integer, ForeignKey('language.id'))
 
 
 class VerbData(Base):
@@ -46,7 +52,7 @@ class VerbData(Base):
     group_id = Column(Integer, ForeignKey('verbgroup.id'))
     origin_name = Column(String, nullable=False)
     destination_name = Column(String, nullable=False)
-    destination_language = Column(String(4), nullable=False)
+    dest_language = Column(Integer, ForeignKey('language.id'))
 
 
 class TenseGroup(Base):
@@ -71,8 +77,8 @@ class PracticeQuestion(Base):
     tense_id = Column(Integer, ForeignKey('tensegroup.id'))
     question_text = Column(String, nullable=False)
     answer_text = Column(String, nullable=False)
-    qlang = Column(String(4), nullable=False)
-    alang = Column(String(4), nullable=False)
+    qlang = Column(Integer, ForeignKey('language.id'))
+    alang = Column(Integer, ForeignKey('language.id'))
     tense_id = Column(Integer, ForeignKey('subject.id'))
 
 
