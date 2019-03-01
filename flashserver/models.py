@@ -11,6 +11,8 @@ Base = declarative_base()
 
 class Language(Base):
     """A lookup table for languages"""
+
+    __tablename__ = 'fc_lang'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     language = Column(String, nullable=False)
 
@@ -34,6 +36,8 @@ class PracticeList(Base):
 
 class VerbGroup(Base):
     """A group of verbs (arbitrary: easy verbs, same meaning, etc.)"""
+
+    __tablename__ = 'fc_verbgroup'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     group_name = Column(String, nullable=False)
     ordering = Column(Integer, nullable=False)
@@ -41,6 +45,8 @@ class VerbGroup(Base):
 
 class Subject(Base):
     """A subject: meaning i, you, him/her, them, etc..."""
+
+    __tablename__ = 'fc_subject'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     subject_name = Column(String, nullable=False)
     language = Column(Integer, ForeignKey('language.id'))
@@ -48,6 +54,7 @@ class Subject(Base):
 
 class VerbData(Base):
     """A verb and its translation"""
+    __tablename__ = 'fc_verbdata'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     group_id = Column(Integer, ForeignKey('verbgroup.id'))
     origin_name = Column(String, nullable=False)
@@ -57,6 +64,7 @@ class VerbData(Base):
 
 class TenseGroup(Base):
     """A tense"""
+    __tablename__ = 'fc_tense'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     tense_name = Column(String, nullable=False)
     ordering = Column(Integer, nullable=False)
@@ -64,6 +72,8 @@ class TenseGroup(Base):
 
 class VerbToList(Base):
     """Linkage to put verbs in lists"""
+
+    __tablename__ = 'fc_verbtolist'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     practice_list_id = Column(Integer, ForeignKey('practicelist.id'))
     group_id = Column(Integer, ForeignKey('verbgroup.id'))
@@ -72,6 +82,8 @@ class VerbToList(Base):
 
 class PracticeQuestion(Base):
     """A question we can select and display to the user."""
+
+    __tablename__ = 'fc_practicequestions'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     verb_id = Column(Integer, ForeignKey('verbdata.id'))
     tense_id = Column(Integer, ForeignKey('tensegroup.id'))
@@ -84,6 +96,8 @@ class PracticeQuestion(Base):
 
 class AnswerStatus(Base):
     """For each list, each question can be a member, if it is and has been answered, this exists"""
+
+    __tablename__ = 'fc_answerstatus'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     score = Column(Integer, nullable=False)
     question_id = Column(Integer, ForeignKey('practicequestion.id'))
@@ -94,6 +108,8 @@ class AnswerStatus(Base):
 
 class AnswerLog(Base):
     """A log of all the answers."""
+
+    __tablename__ = 'fc_answerlog'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     question_id = Column(Integer, ForeignKey('practicequestion.id'))
     value_entered = Column(String, nullable=False)

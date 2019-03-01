@@ -20,3 +20,6 @@ def get_db_secrets():
     return SECRET_CONTENTS.get('db_secrets', {})
 
 
+def get_test_db_secrets():
+    logger.info('Getting database secrets from secret file.')
+    return SECRET_CONTENTS.get('test_db_secrets', {})

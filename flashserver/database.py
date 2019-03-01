@@ -7,6 +7,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
 
 from flashserver.models import Base
+from flashserver.utils import get_db_secrets, get_test_db_secrets
 
 
 ECHO = False
