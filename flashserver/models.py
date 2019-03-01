@@ -12,7 +12,7 @@ Base = declarative_base()
 class Language(Base):
     """A lookup table for languages"""
 
-    __tablename__ = 'fc_lang'
+    __tablename__ = 'fc_language'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     language = Column(String, nullable=False)
 
@@ -30,7 +30,7 @@ class PracticeList(Base):
     """A list which verbs can be linked to, to be learned in its entirety."""
     __tablename__ = 'fc_practicelist'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('fc_user.id'))
     list_name = Column(String, nullable=False)
 
 
@@ -49,22 +49,22 @@ class Subject(Base):
     __tablename__ = 'fc_subject'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     subject_name = Column(String, nullable=False)
-    language = Column(Integer, ForeignKey('language.id'))
+    language = Column(Integer, ForeignKey('fc_language.id'))
 
 
 class VerbData(Base):
     """A verb and its translation"""
     __tablename__ = 'fc_verbdata'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
-    group_id = Column(Integer, ForeignKey('verbgroup.id'))
+    group_id = Column(Integer, ForeignKey('fc_verbgroup.id'))
     origin_name = Column(String, nullable=False)
     destination_name = Column(String, nullable=False)
-    dest_language = Column(Integer, ForeignKey('language.id'))
+    dest_language = Column(Integer, ForeignKey('fc_language.id'))
 
 
 class TenseGroup(Base):
     """A tense"""
-    __tablename__ = 'fc_tense'
+    __tablename__ = 'fc_tensegroup'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     tense_name = Column(String, nullable=False)
     ordering = Column(Integer, nullable=False)
@@ -75,9 +75,9 @@ class VerbToList(Base):
 
     __tablename__ = 'fc_verbtolist'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
-    practice_list_id = Column(Integer, ForeignKey('practicelist.id'))
-    group_id = Column(Integer, ForeignKey('verbgroup.id'))
-    tense_id = Column(Integer, ForeignKey('tensegroup.id'))
+    practice_list_id = Column(Integer, ForeignKey('fc_practicelist.id'))
+    group_id = Column(Integer, ForeignKey('fc_verbgroup.id'))
+    tense_id = Column(Integer, ForeignKey('fc_tensegroup.id'))
 
 
 class PracticeQuestion(Base):
@@ -85,13 +85,13 @@ class PracticeQuestion(Base):
 
     __tablename__ = 'fc_practicequestions'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
-    verb_id = Column(Integer, ForeignKey('verbdata.id'))
-    tense_id = Column(Integer, ForeignKey('tensegroup.id'))
+    verb_id = Column(Integer, ForeignKey('fc_verbdata.id'))
+    tense_id = Column(Integer, ForeignKey('fc_tensegroup.id'))
     question_text = Column(String, nullable=False)
     answer_text = Column(String, nullable=False)
-    qlang = Column(Integer, ForeignKey('language.id'))
-    alang = Column(Integer, ForeignKey('language.id'))
-    tense_id = Column(Integer, ForeignKey('subject.id'))
+    qlang = Column(Integer, ForeignKey('fc_language.id'))
+    alang = Column(Integer, ForeignKey('fc_language.id'))
+    tense_id = Column(Integer, ForeignKey('fc_subject.id'))
 
 
 class AnswerStatus(Base):
@@ -100,9 +100,9 @@ class AnswerStatus(Base):
     __tablename__ = 'fc_answerstatus'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     score = Column(Integer, nullable=False)
-    question_id = Column(Integer, ForeignKey('practicequestion.id'))
+    question_id = Column(Integer, ForeignKey('fc_practicequestions.id'))
     last_answered = Column(DateTime, default=datetime.now, onupdate=datetime.now)
-    list_id = Column(Integer, ForeignKey('practicelist.id'))
+    list_id = Column(Integer, ForeignKey('fc_practicelist.id'))
     # func to find num answers today
 
 
@@ -111,7 +111,7 @@ class AnswerLog(Base):
 
     __tablename__ = 'fc_answerlog'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
-    question_id = Column(Integer, ForeignKey('practicequestion.id'))
+    question_id = Column(Integer, ForeignKey('fc_practicequestions.id'))
     value_entered = Column(String, nullable=False)
     time_answered = Column(DateTime, default=datetime.now, index=True, nullable=False)
-    list_id = Column(Integer, ForeignKey('practicelist.id'))
+    list_id = Column(Integer, ForeignKey('fc_practicelist.id'))
