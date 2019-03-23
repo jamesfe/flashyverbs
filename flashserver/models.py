@@ -57,9 +57,8 @@ class VerbData(Base):
     __tablename__ = 'fc_verbdata'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     group_id = Column(Integer, ForeignKey('fc_verbgroup.id'))
-    origin_name = Column(String, nullable=False)
-    destination_name = Column(String, nullable=False)
-    dest_language = Column(Integer, ForeignKey('fc_language.id'))
+    name = Column(String, nullable=False)
+    language = Column(Integer, ForeignKey('fc_language.id'))
 
 
 class TenseGroup(Base):
@@ -91,7 +90,7 @@ class PracticeQuestion(Base):
     answer_text = Column(String, nullable=False)
     qlang = Column(Integer, ForeignKey('fc_language.id'))
     alang = Column(Integer, ForeignKey('fc_language.id'))
-    tense_id = Column(Integer, ForeignKey('fc_subject.id'))
+    subject_id = Column(Integer, ForeignKey('fc_subject.id'))
 
 
 class AnswerStatus(Base):
