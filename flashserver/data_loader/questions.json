@@ -1,0 +1,13 @@
+[
+{"question": "I sleep", "answer": "je dors", "qlang": "en", "alang": "fr", "subject": "je", "verb": { "name": "dormir", "lang": "fr" }, "group_name": "simple", "tense": "présent" },
+{"question": "I am", "answer": "j'suis", "qlang": "en", "alang": "fr", "subject": "je", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
+{"question": "(informal) You are", "answer": "t'es", "qlang": "en", "alang": "fr", "subject": "tu", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
+{"question": "He is", "answer": "il est", "qlang": "en", "alang": "fr", "subject": "il,elle,on", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
+{"question": "She is", "answer": "elle est", "qlang": "en", "alang": "fr", "subject": "il,elle,on", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
+{"question": "We are", "answer": "nous sommes", "qlang": "en", "alang": "fr", "subject": "nous", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
+{"question": "(formal)You are", "answer": "vous êtes", "qlang": "en", "alang": "fr", "subject": "vous", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
+{"question": "(masculine) They are", "answer": "ils sont", "qlang": "en", "alang": "fr", "subject": "ils,elles", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
+{"question": "(feminine) They are", "answer": "elles sont", "qlang": "en", "alang": "fr", "subject": "ils,elles", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
+{"question": "I have slept", "answer": "j'ai dormi", "qlang": "en", "alang": "fr", "subject": "je", "verb": { "name": "dormir", "lang": "fr" }, "group_name": "simple", "tense": "passé composé" },
+{"question": "j'ai dormi", "answer": "I have slept", "qlang": "fr", "alang": "en", "subject": "je", "verb": { "name": "to sleep", "lang": "en" }, "group_name": "simple", "tense": "passé composé" }
+]
