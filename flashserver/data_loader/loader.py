@@ -119,7 +119,6 @@ def check_insert_group(group_name):
 
 
 def insert(item):
-
     existing_question = session.query(PracticeQuestion.id).filter(
         PracticeQuestion.question_text == item['question'],
         PracticeQuestion.answer_text == item['answer']).count()
@@ -161,6 +160,7 @@ def empty_tables():
 
 
 def simple_practice_list():
+    """Users are linked to a practice list which consists of some groups of verbs + their tenses"""
     print('adding practice user, list, practicelist')
     basic_user = session.query(User).filter(User.username == "tester").first()
     if basic_user is None:

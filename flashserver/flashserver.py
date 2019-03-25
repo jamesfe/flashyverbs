@@ -8,7 +8,7 @@ from tornado.web import Application
 
 from flashserver.database import session_factory, test_session_factory
 
-# from flashserver.handlers import ListItems
+from flashserver.handlers.business import QuestionHandler
 
 
 logger = logging.getLogger('flashserver')
@@ -30,6 +30,7 @@ class FlashServer(Application):
         settings.update(settings_override)
 
         urls = [
+            (r"/question/(?P<q_id>\w+)/?", QuestionHandler)
             # (r"/", ListItems),
         ]
         super(FlashServer, self).__init__(urls, **settings)
