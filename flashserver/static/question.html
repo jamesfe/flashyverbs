@@ -1,0 +1,27 @@
+<html>
+<script>
+  function getQuestion() {
+    const Http = new XMLHttpRequest();
+    const hostname = 'http://localhost:8891';
+    const url = hostname + '/question/52';
+    Http.open("GET", url);
+    Http.send();
+    Http.onreadystatechange=(e)=>{
+      if (Http.readyState === 4) {
+        var target = document.getElementById("q_area");
+        response = JSON.parse(Http.responseText);
+        if (response.status === "success") {
+          target.textContent = response.question;
+        }
+      }
+    }
+  }
+</script>
+
+<body>
+  <h1>hello</h1>
+  <h3 id="q_area">question goes here</h3>
+  <button onClick="getQuestion()">retrieve question</button>
+</body>
+
+</html>

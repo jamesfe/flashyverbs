@@ -5,6 +5,7 @@ import coloredlogs
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.web import Application
+from os import path
 
 from flashserver.database import session_factory, test_session_factory
 
@@ -24,14 +25,15 @@ class FlashServer(Application):
         else:
             self.session = test_session_factory()
         settings = {
+            'static_path': path.join(path.dirname(__file__), 'static'),
             'debug': True,
             'autoreload': True
         }
         settings.update(settings_override)
 
         urls = [
-            (r"/question/(?P<q_id>\w+)/?", QuestionHandler)
-            # (r"/", ListItems),
+            (r'/question/(?P<q_id>\w+)/?', QuestionHandler)
+            # (r'/', ListItems),
         ]
         super(FlashServer, self).__init__(urls, **settings)
 
