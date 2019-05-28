@@ -102,7 +102,7 @@ class AnswerStatus(Base):
     question_id = Column(Integer, ForeignKey('fc_practicequestions.id'))
     last_answered = Column(DateTime, default=datetime.now, onupdate=datetime.now)
     list_id = Column(Integer, ForeignKey('fc_practicelist.id'))
-    # func to find num answers today
+    # TODO: Add func to find num answers today
 
 
 class AnswerLog(Base):
