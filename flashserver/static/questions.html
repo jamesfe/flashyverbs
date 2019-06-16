@@ -1,8 +1,41 @@
 <html>
+<style>
+body {
+    font-family: Arial,"Helvetica Neue",Helvetica,sans-serif !important
+}
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  flex-flow: wrap;
+}
+#question {
+  color: red;
+  font-size: 24pt;
+  padding: 30px
+}
+#answer {
+  break-after: always;
+  color: green;
+  font-size: 24pt;
+  padding: 30px
+}
 
+.blank {
+}
+
+</style>
+
+<div class="container">
+  <div class="content">
     <div id="question" class="blank">blah</div>
+    <div id="entry" class="entry"><input placeholder="answer"></input><button>Answer</button></div>
     <div id="answer" class="blank">ansblah</div>
-
+  </div>
+</div>
 
     <script src="questionpage.js"></script>
 </html>
