@@ -35,7 +35,7 @@ class PracticeList(Base):
 
 
 class VerbGroup(Base):
-    """A group of verbs (arbitrary: easy verbs, same meaning, etc.)"""
+    """A group of verbs (arbitrary: easy verbs, same meaning, etc.). A verb can only belong to one group."""
 
     __tablename__ = 'fc_verbgroup'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)

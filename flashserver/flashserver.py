@@ -9,7 +9,7 @@ from tornado.web import Application, StaticFileHandler
 
 from flashserver.database import session_factory, test_session_factory
 
-from flashserver.handlers.business import QuestionHandler
+from flashserver.handlers.business import QuestionHandler, ListHandler
 
 
 logger = logging.getLogger('flashserver')
@@ -40,8 +40,8 @@ class FlashServer(Application):
 
         urls = [
             (r'/question/(?P<q_id>\w+)/?', QuestionHandler),
-            (r'/', LocalStaticFileHandler, dict(path=settings['static_path']))
-            # (r'/', ListItems),
+            (r'/', LocalStaticFileHandler, dict(path=settings['static_path'])),
+            (r'/list/(?P<list_id>\w+)/?', ListHandler),
         ]
         super(FlashServer, self).__init__(urls, **settings)
 

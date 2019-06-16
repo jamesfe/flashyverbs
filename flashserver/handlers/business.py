@@ -3,6 +3,7 @@ import logging
 import coloredlogs
 
 from flashserver.handlers.generic import GenericHandler
+from flashserver.models import VerbToList, VerbData, PracticeQuestion
 
 logger = logging.getLogger('flashserver')
 logger.propagate = False
@@ -17,16 +18,29 @@ class QuestionHandler(GenericHandler):
 
 class ListHandler(GenericHandler):
 
-    def get(self, list_id):
-        # TODO: FIX
-        practice_questions = self.session.query(
-            PracticeQuestion).filter(
-            VerbToList.practice_list_id == list_id,
-            VerbToList.group_id == PracticeQuestion.group_
+    def get_valid_questions(self, list_id):
+        """Given a list_id return all the valid questions for this list."""
+        session = self.application.session
+        all_list_connections = session.query(VerbToList.group_id, VerbToList.tense_id).filter(VerbToList.practice_list_id == list_id).all()
+        questions = []
+        for item in all_list_connections:
+            valid_groups= session.query(VerbData.id).filter(VerbData.group_id == item.group_id).all()
+            subquery = session.query(PracticeQuestion).filter(
+                PracticeQuestion.tense_id == item.tense_id,
+                PracticeQuestion.verb_id.in_(valid_groups)).all()
+            questions.extend(subquery)
+        return questions
 
-        acceptable_verbs = self.session.query(
-            VerbToList.group_id, 
-            VerbToList.tense_id).filter(
-            VerbToList.practice_list_id == list_id).all()
-        
-        self.session.query(
+    def get(self, list_id):
+        """Get a question based on a list."""
+        questions = self.get_valid_questions(list_id)
+
+        if len(questions) > 0:
+            q = questions[0]
+            question = {
+                'q': q.question_text,
+                'a': q.answer_text
+            }
+            self.writejson(question)
+        else:
+            self.writejson({})
