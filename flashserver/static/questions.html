@@ -12,16 +12,35 @@ body {
   justify-content: center;
   flex-flow: wrap;
 }
+#question_content {
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 15px;
+}
 #question {
-  color: red;
+  color: black;
   font-size: 24pt;
-  padding: 30px
+  font-weight: bold;
+}
+#question_input {
+  margin-top: 10px;
+}
+.entry {
+  font-size: 24pt;
+  border-radius: 5px;
+  border: 1px solid grey;
+  font-weight: bold;
 }
 #answer {
   break-after: always;
   color: green;
   font-size: 24pt;
-  padding: 30px
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 15px;
+
 }
 
 .blank {
@@ -31,9 +50,13 @@ body {
 
 <div class="container">
   <div class="content">
-    <div id="question" class="blank">blah</div>
-    <div id="entry" class="entry"><input placeholder="answer"></input><button>Answer</button></div>
-    <div id="answer" class="blank">ansblah</div>
+    <div id="question_content">
+      <div id="question" class="blank">Question Text</div>
+      <div id="question_input">
+        <div><input class="entry" placeholder="Answer"></input><button class="entry" style="margin-left: 5px;">Next</button></div>
+      </div>
+    </div>
+    <div id="answer" class="blank">Answer Feedback</div>
   </div>
 </div>
 
