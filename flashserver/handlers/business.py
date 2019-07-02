@@ -24,7 +24,7 @@ class ListHandler(GenericHandler):
         all_list_connections = session.query(VerbToList.group_id, VerbToList.tense_id).filter(VerbToList.practice_list_id == list_id).all()
         questions = []
         for item in all_list_connections:
-            valid_groups= session.query(VerbData.id).filter(VerbData.group_id == item.group_id).all()
+            valid_groups = session.query(VerbData.id).filter(VerbData.group_id == item.group_id).all()
             subquery = session.query(PracticeQuestion).filter(
                 PracticeQuestion.tense_id == item.tense_id,
                 PracticeQuestion.verb_id.in_(valid_groups)).all()

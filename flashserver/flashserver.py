@@ -6,12 +6,13 @@ import coloredlogs
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.web import Application, StaticFileHandler
+import tornado
 
 from flashserver.database import session_factory, test_session_factory
 
 from flashserver.handlers.business import QuestionHandler, ListHandler
 
-
+tornado.log.enable_pretty_logging()
 logger = logging.getLogger('flashserver')
 logger.setLevel(logging.DEBUG)
 coloredlogs.install(format='%(asctime)s,%(msecs)03d - %(levelname)s: %(message)s', level='DEBUG', logger=logger, milliseconds=False)
