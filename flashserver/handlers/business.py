@@ -1,9 +1,10 @@
 import logging
+import json
 
 import coloredlogs
 
 from flashserver.handlers.generic import GenericHandler
-from flashserver.models import VerbToList, VerbData, PracticeQuestion
+from flashserver.models import VerbToList, VerbData, PracticeQuestion, AnswerLog
 
 logger = logging.getLogger('flashserver')
 logger.propagate = False
@@ -39,8 +40,33 @@ class ListHandler(GenericHandler):
             q = questions[0]
             question = {
                 'q': q.question_text,
-                'a': q.answer_text
+                'a': q.answer_text,
+                'q_id': q.id
             }
             self.writejson(question)
         else:
             self.writejson({})
+
+    def post(self, list_id):
+        """Someone will post an answer to a question to this list endpoint.  It's not intuitive
+        but it gives us the user's name (insecure for now) and it associates the question with a list."""
+        session = self.application.session
+        payload = json.loads(self.request.body)
+        answer = payload['answer'].strip().lower()
+        question = session.query(PracticeQuestion).filter(PracticeQuestion.id == payload['q_id']).first()
+        # TODO: what if there is no question?
+        if question is None:
+            self.writejson({'status': 'wrong'})
+            # Probably not the best but we can change this later, it's an edge case.
+
+        correct = answer == question.answer_text.lower()
+        answer_log = {
+            'question_id': payload['q_id'],
+            'value_entered': payload['answer'],
+            'list_id': list_id,
+            'correct': correct
+        }
+        session.add(AnswerLog(**answer_log))
+        session.commit()
+        response = {'correct': correct}
+        self.writejson(response)

@@ -31,7 +31,8 @@ function answerQuestion() {
    * 1. Send the answer to the server, where it's logged
    * 2. Retrieve a new answer
    * 3. Clear the DOM and paint the relevant elements
-   * 4. Return, we wait for another user action. */
+   * 4. Display some relevant feedback for the user (green/red) and setTimeout to fade it
+   * 5. Return, we wait for another user action. */
   console.log('answering');
 }
 

@@ -27,16 +27,18 @@ class LocalStaticFileHandler(StaticFileHandler):
 class FlashServer(Application):
 
     def __init__(self, ioloop=None, settings_override: dict = {}, test: bool = False):
-        if not test:
-            self.session = session_factory()
-        else:
-            self.session = test_session_factory()
         settings = {
             'static_path': path.join(path.dirname(__file__), 'static'),
             'xsrf_cookies': True,
             'debug': True,
             'autoreload': True
         }
+        if not test:
+            self.session = session_factory()
+        else:
+            del settings['xsrf_cookies']
+            self.session = test_session_factory()
+
         settings.update(settings_override)
 
         urls = [

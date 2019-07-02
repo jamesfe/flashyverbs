@@ -4,7 +4,7 @@ from datetime import datetime
 
 from sqlalchemy.ext.declarative import declarative_base
 
-from sqlalchemy import Column, DateTime, String, Integer, ForeignKey
+from sqlalchemy import Column, DateTime, String, Integer, ForeignKey, Boolean
 
 Base = declarative_base()
 
@@ -112,5 +112,6 @@ class AnswerLog(Base):
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     question_id = Column(Integer, ForeignKey('fc_practicequestions.id'))
     value_entered = Column(String, nullable=False)
+    correct = Column(Boolean)
     time_answered = Column(DateTime, default=datetime.now, index=True, nullable=False)
     list_id = Column(Integer, ForeignKey('fc_practicelist.id'))

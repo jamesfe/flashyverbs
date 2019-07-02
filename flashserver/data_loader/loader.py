@@ -2,12 +2,12 @@ import json
 
 from sqlalchemy import func
 
-from flashserver.database import session_factory
+from flashserver.database import test_session_factory
 from flashserver.models import Language, VerbGroup, VerbData, PracticeQuestion, TenseGroup, Subject
 from flashserver.models import User, PracticeList, VerbToList
 
 
-session = session_factory()
+session = test_session_factory()
 language_cache = {}
 
 
