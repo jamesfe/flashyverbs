@@ -1,3 +1,4 @@
+import random
 import logging
 import json
 
@@ -37,7 +38,7 @@ class ListHandler(GenericHandler):
         questions = self.get_valid_questions(list_id)
 
         if len(questions) > 0:
-            q = questions[0]
+            q = random.choice(questions)
             question = {
                 'q': q.question_text,
                 'a': q.answer_text,
