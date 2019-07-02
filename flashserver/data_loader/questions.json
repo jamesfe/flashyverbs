@@ -1,6 +1,6 @@
 [
 {"question": "I sleep", "answer": "je dors", "qlang": "en", "alang": "fr", "subject": "je", "verb": { "name": "dormir", "lang": "fr" }, "group_name": "simple", "tense": "présent" },
-{"question": "I am", "answer": "j'suis", "qlang": "en", "alang": "fr", "subject": "je", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
+{"question": "I am", "answer": "je suis", "qlang": "en", "alang": "fr", "subject": "je", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
 {"question": "(informal) You are", "answer": "t'es", "qlang": "en", "alang": "fr", "subject": "tu", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
 {"question": "He is", "answer": "il est", "qlang": "en", "alang": "fr", "subject": "il,elle,on", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
 {"question": "She is", "answer": "elle est", "qlang": "en", "alang": "fr", "subject": "il,elle,on", "verb": { "name": "être", "lang": "fr" }, "group_name": "fundamental", "tense": "présent" },
