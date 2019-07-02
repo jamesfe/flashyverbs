@@ -29,14 +29,13 @@ class FlashServer(Application):
     def __init__(self, ioloop=None, settings_override: dict = {}, test: bool = False):
         settings = {
             'static_path': path.join(path.dirname(__file__), 'static'),
-            'xsrf_cookies': True,
+            # 'xsrf_cookies': True,  # This is actually a big problem because of the way we serve our docs, there aren't any cookies set but we need to do this or we'll be stuck with insecure posts.insecure posts.
             'debug': True,
             'autoreload': True
         }
         if not test:
             self.session = session_factory()
         else:
-            del settings['xsrf_cookies']
             self.session = test_session_factory()
 
         settings.update(settings_override)

@@ -5,6 +5,7 @@ from flashserver.flashserver import FlashServer
 from flashserver.database import test_session_factory
 from flashserver.models import AnswerLog
 
+
 class BasicBusinessHandlersTests(AsyncHTTPTestCase):
 
     def get_app(self):

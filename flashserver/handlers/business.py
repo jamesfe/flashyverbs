@@ -68,5 +68,5 @@ class ListHandler(GenericHandler):
         }
         session.add(AnswerLog(**answer_log))
         session.commit()
-        response = {'correct': correct}
+        response = {'correct': correct, 'answer': question.answer_text}
         self.writejson(response)
