@@ -27,8 +27,7 @@ function setQuestion(q) {
   getQuestionDOM().classList.add('filled');
 }
 
-async function submitAnswer() {
-  let inputAnswer = document.getElementById("answer_input").value.trim();
+async function submitAnswer(inputAnswer) {
   if ((currentQuestion === -1) || (inputAnswer.length === 0)) {
     console.log('no answer or no set question');
     return undefined;
@@ -54,7 +53,9 @@ async function answerQuestion() {
    * 3. Display some relevant feedback for the user (green/red) and setTimeout to fade it
    * 4. Return, we wait for another user action. */
   // 1.
-  let answerResponse = await submitAnswer();
+  let inputAnswer = document.getElementById("answer_input").value.trim();
+  document.getElementById("answer_input").value = "";
+  let answerResponse = await submitAnswer(inputAnswer);
   console.log('answer reponse ', answerResponse);
   // 2.
   let newQuestion = await getQuestionByList(getCurrentList());
@@ -69,8 +70,8 @@ async function answerQuestion() {
     feedbackSpace.classList.remove('right');
     feedbackSpace.innerHTML = 'Wrong: ' + answerResponse.answer;
   } else {
-    feedbackSpace.classList.add('wrong');
-    feedbackSpace.classList.remove('right');
+    feedbackSpace.classList.add('right');
+    feedbackSpace.classList.remove('wrong');
     feedbackSpace.innerHTML = 'Right: ' + answerResponse.answer;
   }
   feedbackSpace.hidden = false;
