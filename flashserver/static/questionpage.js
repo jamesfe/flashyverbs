@@ -51,18 +51,15 @@ async function answerQuestion() {
   /* Answer the question and handle what happens next:
    * 1. Send the answer to the server, where it's logged
    * 2. Retrieve a new question
-   * 3. Clear the DOM and paint the relevant elements
-   * 4. Display some relevant feedback for the user (green/red) and setTimeout to fade it
-   * 5. Return, we wait for another user action. */
+   * 3. Display some relevant feedback for the user (green/red) and setTimeout to fade it
+   * 4. Return, we wait for another user action. */
+  // 1.
   let answerResponse = await submitAnswer();
   console.log('answer reponse ', answerResponse);
-  // 1.
-  let newQuestion = await getQuestionByList(getCurrentList());
   // 2.
+  let newQuestion = await getQuestionByList(getCurrentList());
   setQuestion(newQuestion);
   // 3.
-  let answerClass = 'right';
-
   /* Make DOM updates to the feedback box. I'm sure there is a clever way to do this
    * but this code seems more transparent to me. */
   let feedbackSpace = document.getElementById('answer');
@@ -70,14 +67,16 @@ async function answerQuestion() {
   if (!answerResponse.correct) {
     feedbackSpace.classList.add('wrong');
     feedbackSpace.classList.remove('right');
+    feedbackSpace.innerHTML = 'Wrong: ' + answerResponse.answer;
   } else {
     feedbackSpace.classList.add('wrong');
     feedbackSpace.classList.remove('right');
+    feedbackSpace.innerHTML = 'Right: ' + answerResponse.answer;
   }
   feedbackSpace.hidden = false;
   /* Finished making DOM updates */
-
-
+  // 4. Whatever
+  return undefined;
 }
 
 async function introductoryCheck() {
