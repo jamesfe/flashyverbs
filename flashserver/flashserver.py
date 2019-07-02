@@ -11,6 +11,7 @@ import tornado
 from flashserver.database import session_factory, test_session_factory
 
 from flashserver.handlers.business import QuestionHandler, ListHandler
+from flashserver.handlers.admin import VerbManager
 
 tornado.log.enable_pretty_logging()
 logger = logging.getLogger('flashserver')
@@ -44,6 +45,7 @@ class FlashServer(Application):
             (r'/question/(?P<q_id>\w+)/?', QuestionHandler),
             (r'/', LocalStaticFileHandler, dict(path=settings['static_path'])),
             (r'/list/(?P<list_id>\w+)/?', ListHandler),
+            (r'/admin/verbmanager/>\w+)/?', VerbManager),
         ]
         super(FlashServer, self).__init__(urls, **settings)
 
