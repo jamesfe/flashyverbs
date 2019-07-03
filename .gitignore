@@ -3,3 +3,4 @@ localenv/
 *.sw*
 secrets.json
 scraping/data/
+scraping/.ipynb_checkpoints/
