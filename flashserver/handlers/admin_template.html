@@ -17,15 +17,20 @@ body {
     font-size: 12px;
 }
 input {
-
     font-size: 16px;
+}
+.submitbutton {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+    border: 1px solid black;
 }
 select {
     font-size: 16px;
 }
 </style>
     </head>
-
+    <form action="/admin/verbmanager/" method="POST">
     <table>
 
         <tr>
@@ -42,28 +47,28 @@ select {
             <tr>
 
                 <td>
-                    <select name="verbid_{{ question.id }}">
+                    <select name="verb_id_{{ question.id }}">
                     {% for verb in verbs %}
-                        <option value="verb.id" {% if question.verb_id== verb.id %} selected {% end %} > {{ verb.name }} </option>
+                    <option value="{{ verb.id }}" {% if question.verb_id== verb.id %} selected {% end %} > {{ verb.name }} </option>
                     {% end %}
                     </select>
                 </td>
 
                 <td>
-                    <select name="tenseid_{{ question.id }}">
+                    <select name="tense_id_{{ question.id }}">
                     {% for tense in tenses %}
-                        <option value="tense.id" {% if question.tense_id == tense.id %} selected {% end %} > {{ tense.tense_name }} </option>
+                    <option value="{{ tense.id }}" {% if question.tense_id == tense.id %} selected {% end %} > {{ tense.tense_name }} </option>
                     {% end %}
                     </select>
                 </td>
 
-                <td><input value="{{ question.question_text }}"></input></td>
-                <td><input value="{{ question.answer_text }}"></input></td>
+                <td><input name="question_text_{{ question.id }}" value="{{ question.question_text }}"></input></td>
+                <td><input name="answer_text_{{ question.id }}" value="{{ question.answer_text }}"></input></td>
 
                 <td>
                     <select name="qlang_{{ question.id }}">
                     {% for lang in languages %}
-                        <option value="lang.id" {% if question.qlang == lang.id %} selected {% end %} > {{ lang.language }} </option>
+                    <option value="{{ lang.id }}" {% if question.qlang == lang.id %} selected {% end %} > {{ lang.language }} </option>
                     {% end %}
                     </select>
                 </td>
@@ -71,20 +76,72 @@ select {
                 <td>
                     <select name="alang_{{ question.id }}">
                     {% for lang in languages %}
-                        <option value="lang.id" {% if question.alang == lang.id %} selected {% end %} > {{ lang.language }} </option>
+                    <option value="{{ lang.id }}" {% if question.alang == lang.id %} selected {% end %} > {{ lang.language }} </option>
                     {% end %}
                     </select>
                 </td>
 
                 <td>
-                    <select name="subjectid_{{ question.id }}">
+                    <select name="subject_id_{{ question.id }}">
                     {% for subj in subjects %}
-                        <option value="subj.id" {% if question.subject_id == subj.id %} selected {% end %} > {{ subj.subject_name }} </option>
+                    <option value="{{ subj.id }}" {% if question.subject_id == subj.id %} selected {% end %} > {{ subj.subject_name }} </option>
                     {% end %}
                     </select>
                 </td>
 
             </tr>
         {% end %}
+        <!-- a row to enter new data into -->
+         <tr>
+
+                <td>
+                    <select name="verb_id_new">
+                    {% for verb in verbs %}
+                    <option value="{{ verb.id }}"> {{ verb.name }} </option>
+                    {% end %}
+                    </select>
+                </td>
+
+                <td>
+                    <select name="tense_id_new">
+                    {% for tense in tenses %}
+                        <option value="{{tense.id }}"> {{ tense.tense_name }} </option>
+                    {% end %}
+                    </select>
+                </td>
+
+                <td><input name="question_text_new" value=""></input></td>
+                <td><input name="answer_text_new" value=""></input></td>
+
+                <td>
+                    <select name="qlang_new">
+                    {% for lang in languages %}
+                        <option value="{{lang.id }}"> {{ lang.language }} </option>
+                    {% end %}
+                    </select>
+                </td>
+
+                <td>
+                    <select name="alang_new">
+                    {% for lang in languages %}
+                        <option value="{{lang.id }}"> {{ lang.language }} </option>
+                    {% end %}
+                    </select>
+                </td>
+
+                <td>
+                    <select name="subject_id_new">
+                    {% for subj in subjects %}
+                        <option value="{{subj.id }}"> {{ subj.subject_name }} </option>
+                    {% end %}
+                    </select>
+                </td>
+
+            </tr>
+
     </table>
+    <br />
+    <br />
+    <input class="submitbutton" type="submit">
+    </form>
 </html>
