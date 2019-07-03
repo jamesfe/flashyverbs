@@ -45,7 +45,7 @@ class FlashServer(Application):
             (r'/question/(?P<q_id>\w+)/?', QuestionHandler),
             (r'/', LocalStaticFileHandler, dict(path=settings['static_path'])),
             (r'/list/(?P<list_id>\w+)/?', ListHandler),
-            (r'/admin/verbmanager/>\w+)/?', VerbManager),
+            (r'/admin/verbmanager/', VerbManager),
         ]
         super(FlashServer, self).__init__(urls, **settings)
 

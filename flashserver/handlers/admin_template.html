@@ -1,0 +1,90 @@
+
+<html>
+
+    <head>
+<style>
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 10px;
+}
+body {
+    font-family: Helvetica;
+    font-size: 12px;
+}
+input {
+
+    font-size: 16px;
+}
+select {
+    font-size: 16px;
+}
+</style>
+    </head>
+
+    <table>
+
+        <tr>
+            <th>verb_id</th>
+            <th>tense_id</th>
+            <th>question_text</th>
+            <th>answer_text</th>
+            <th>qlang</th>
+            <th>alang</th>
+            <th>subject_id</th>
+        </tr>
+        {% for question in questions %}
+
+            <tr>
+
+                <td>
+                    <select name="verbid_{{ question.id }}">
+                    {% for verb in verbs %}
+                        <option value="verb.id" {% if question.verb_id== verb.id %} selected {% end %} > {{ verb.name }} </option>
+                    {% end %}
+                    </select>
+                </td>
+
+                <td>
+                    <select name="tenseid_{{ question.id }}">
+                    {% for tense in tenses %}
+                        <option value="tense.id" {% if question.tense_id == tense.id %} selected {% end %} > {{ tense.tense_name }} </option>
+                    {% end %}
+                    </select>
+                </td>
+
+                <td><input value="{{ question.question_text }}"></input></td>
+                <td><input value="{{ question.answer_text }}"></input></td>
+
+                <td>
+                    <select name="qlang_{{ question.id }}">
+                    {% for lang in languages %}
+                        <option value="lang.id" {% if question.qlang == lang.id %} selected {% end %} > {{ lang.language }} </option>
+                    {% end %}
+                    </select>
+                </td>
+
+                <td>
+                    <select name="alang_{{ question.id }}">
+                    {% for lang in languages %}
+                        <option value="lang.id" {% if question.alang == lang.id %} selected {% end %} > {{ lang.language }} </option>
+                    {% end %}
+                    </select>
+                </td>
+
+                <td>
+                    <select name="subjectid_{{ question.id }}">
+                    {% for subj in subjects %}
+                        <option value="subj.id" {% if question.subject_id == subj.id %} selected {% end %} > {{ subj.subject_name }} </option>
+                    {% end %}
+                    </select>
+                </td>
+
+            </tr>
+        {% end %}
+    </table>
+</html>
