@@ -1,0 +1,13 @@
+{
+    "alang": "fr",
+    "answer": "je dors",
+    "group_name": "simple",
+    "qlang": "en",
+    "question": "I sleep",
+    "subject": "je",
+    "tense": "pr\u00e9sent",
+    "verb": {
+        "lang": "fr",
+        "name": "dormir"
+    }
+}
