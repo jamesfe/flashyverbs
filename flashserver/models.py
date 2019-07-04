@@ -91,6 +91,7 @@ class PracticeQuestion(Base):
     qlang = Column(Integer, ForeignKey('fc_language.id'))
     alang = Column(Integer, ForeignKey('fc_language.id'))
     subject_id = Column(Integer, ForeignKey('fc_subject.id'))
+    reviewed = Column(Boolean, default=False)
 
 
 class AnswerStatus(Base):

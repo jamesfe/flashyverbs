@@ -2,12 +2,11 @@ import json
 
 from sqlalchemy import func
 
-from flashserver.database import test_session_factory
+from flashserver.database import test_session_factory, session_factory
 from flashserver.models import Language, VerbGroup, VerbData, PracticeQuestion, TenseGroup, Subject
 from flashserver.models import User, PracticeList, VerbToList
 
 
-session = test_session_factory()
 language_cache = {}
 
 
@@ -151,6 +150,7 @@ def empty_tables():
     delete_order = [
         PracticeQuestion,
         Subject,
+        VerbToList,
         TenseGroup,
         VerbData,
         VerbGroup]
@@ -189,6 +189,18 @@ def load_data():
     return data
 
 
+session = test_session_factory()
+empty_tables()
+
+insert_basic_groups()
+insert_french_subjects()
+insert_tense_ids()
+for item in load_data():
+    insert(item)
+
+simple_practice_list()
+
+session = session_factory()
 empty_tables()
 
 insert_basic_groups()
