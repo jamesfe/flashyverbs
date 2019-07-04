@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import re
 import json
 
-
+vtrans = {}
 with open('scraping/verbtranslations.json', 'r') as infile:
     vtrans = json.load(infile)
 

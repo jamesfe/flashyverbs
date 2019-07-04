@@ -1,5 +1,6 @@
 import unittest
-from scraping.get_conjugations import verb_to_csv
+from scraping.get_conjugations import verb_to_csv, vtrans
+
 
 class TestPresentTenseVerbs(unittest.TestCase):
 
@@ -52,3 +53,9 @@ class TestPasseComposeTenseVerbs(unittest.TestCase):
         self.assertEqual(tval[verb]['tenses'][tense]['je'], 'ai profité')
         self.assertEqual(tval[verb]['tenses'][tense]['il,elle,on'], 'a profité')
 
+
+class TestComprehensiveProblems(unittest.TestCase):
+
+    def test_all_present(self):
+        for k, v in vtrans.items():
+            tval = verb_to_csv(k, 'présent')
