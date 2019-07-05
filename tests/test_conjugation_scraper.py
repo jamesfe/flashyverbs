@@ -1,5 +1,5 @@
 import unittest
-from scraping.get_conjugations import verb_to_csv, vtrans
+from scraping.get_conjugations import get_verb_conj_by_tense, vtrans
 
 
 class TestPresentTenseVerbs(unittest.TestCase):
@@ -7,7 +7,7 @@ class TestPresentTenseVerbs(unittest.TestCase):
     def test_parse_acheter(self):
         """Test acheter in the present tense"""
         tense = 'présent'
-        tval = verb_to_csv('acheter', tense)
+        tval = get_verb_conj_by_tense('acheter', tense)
         self.assertEqual(tval['acheter']['tenses'][tense]['je'], 'achète')
         self.assertEqual(tval['acheter']['tenses'][tense]['nous'], 'achetons')
 
@@ -15,7 +15,7 @@ class TestPresentTenseVerbs(unittest.TestCase):
         """Test avoir in the present tense"""
         tense = 'présent'
         verb = 'avoir'
-        tval = verb_to_csv(verb, tense)
+        tval = get_verb_conj_by_tense(verb, tense)
         self.assertEqual(tval[verb]['tenses'][tense]['je'], 'ai')
         self.assertEqual(tval[verb]['tenses'][tense]['nous'], 'avons')
 
@@ -23,7 +23,7 @@ class TestPresentTenseVerbs(unittest.TestCase):
         """Test profiter in the present tense"""
         tense = 'présent'
         verb = 'profiter'
-        tval = verb_to_csv(verb, tense)
+        tval = get_verb_conj_by_tense(verb, tense)
         self.assertEqual(tval[verb]['tenses'][tense]['je'], 'profite')
         self.assertEqual(tval[verb]['tenses'][tense]['il,elle,on'], 'profite')
 
@@ -33,7 +33,7 @@ class TestPasseComposeTenseVerbs(unittest.TestCase):
     def test_parse_acheter(self):
         """Test acheter in the present tense"""
         tense = 'passé composé'
-        tval = verb_to_csv('acheter', tense)
+        tval = get_verb_conj_by_tense('acheter', tense)
         self.assertEqual(tval['acheter']['tenses'][tense]['je'], 'ai acheté')
         self.assertEqual(tval['acheter']['tenses'][tense]['nous'], 'avons acheté')
 
@@ -41,7 +41,7 @@ class TestPasseComposeTenseVerbs(unittest.TestCase):
         """Test avoir in the present tense"""
         tense = 'passé composé'
         verb = 'avoir'
-        tval = verb_to_csv(verb, tense)
+        tval = get_verb_conj_by_tense(verb, tense)
         self.assertEqual(tval[verb]['tenses'][tense]['je'], 'ai eu')
         self.assertEqual(tval[verb]['tenses'][tense]['nous'], 'avons eu')
 
@@ -49,7 +49,7 @@ class TestPasseComposeTenseVerbs(unittest.TestCase):
         """Test profiter in the present tense"""
         tense = 'passé composé'
         verb = 'profiter'
-        tval = verb_to_csv(verb, tense)
+        tval = get_verb_conj_by_tense(verb, tense)
         self.assertEqual(tval[verb]['tenses'][tense]['je'], 'ai profité')
         self.assertEqual(tval[verb]['tenses'][tense]['il,elle,on'], 'a profité')
 
@@ -58,4 +58,8 @@ class TestComprehensiveProblems(unittest.TestCase):
 
     def test_all_present(self):
         for k, v in vtrans.items():
-            tval = verb_to_csv(k, 'présent')
+            get_verb_conj_by_tense(k, 'présent')
+
+    def test_all_passecompose(self):
+        for k, v in vtrans.items():
+            get_verb_conj_by_tense(k, 'passé composé')

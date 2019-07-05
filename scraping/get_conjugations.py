@@ -42,7 +42,7 @@ def custom_clean(x):
     return x
 
 
-def verb_to_csv(french_verb, tense):
+def get_verb_conj_by_tense(french_verb, tense):
     pane_guts = get_raw_tense_data(french_verb, tense)
     if type(pane_guts) is list and len(pane_guts) > 0:
         pane_guts = pane_guts[0]
@@ -65,3 +65,12 @@ def verb_to_csv(french_verb, tense):
     for i, subj in enumerate(french_subj):
         ret_val[french_verb]['tenses'][tense][subj] = verblist[i]
     return ret_val
+
+
+def print_conjugations_to_csv(verb, tense):
+    # alang, an swer, group_name, qlang, question, subj, tense, {verb: lang name}
+    data = get_verb_conj_by_tense(verb, tense)
+    questions = []
+    english_verb = vtrans[verb]
+    for subj, conj in data[verb]['tenses'][tense]:
+        print('{}, {] {}, {}, {}, {}, {}, {}, {}, {}, {}'.format('fr', subj, conj, 'ungrouped', 'en', 'subj', english_verb, subj, tense, verb, 'fr'))
